@@ -159,6 +159,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
 	// omni additions start
     private boolean mLandscape;
     private boolean mHeaderImageEnabled;
+	private boolean mForceHideQsStatusBar;
 
     private class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
@@ -251,6 +252,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mCarrierGroup = findViewById(R.id.carrier_group);
 		
 		 updateResources();
+        mForceHideQsStatusBar = mContext.getResources().getBoolean(R.bool.qs_status_bar_hidden);
 
         Rect tintArea = new Rect(0, 0, 0, 0);
         int colorForeground = Utils.getColorAttrDefaultColor(getContext(),
@@ -754,7 +756,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
 
     // Update color schemes in landscape to use wallpaperTextColor
     private void updateStatusbarProperties() {
-        boolean shouldUseWallpaperTextColor = mLandscape && !mHeaderImageEnabled;
+        boolean shouldUseWallpaperTextColor = (mLandscape || mForceHideQsStatusBar) && !mHeaderImageEnabled;
         mClockView.useWallpaperTextColor(shouldUseWallpaperTextColor);
     }
 }
