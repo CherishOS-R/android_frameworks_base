@@ -40,5 +40,9 @@
 
      <!-- Starting padding for custom status bar elements -->
     <dimen name="status_bar_start_padding">2dp</dimen>
+	
+	<!-- OmniStyle custom headers -->
+    <dimen name="qs_header_image_offset">0dp</dimen>
+    <dimen name="qs_header_image_side_margin">0dp</dimen>
 
 </resources>
