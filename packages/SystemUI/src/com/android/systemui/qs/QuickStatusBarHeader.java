@@ -167,6 +167,9 @@ public class QuickStatusBarHeader extends RelativeLayout implements
             resolver.registerContentObserver(Settings.System
                     .getUriFor(Settings.System.STATUS_BAR_BATTERY_STYLE), false,
                     this, UserHandle.USER_ALL);
+			resolver.registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.QS_HIDE_BATTERY), false,
+                    this, UserHandle.USER_ALL);
             }
 
         @Override
@@ -399,6 +402,9 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     }
 
     private void updateSettings() {
+		isHideBattIcon = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.QS_HIDE_BATTERY, 0,
+                UserHandle.USER_CURRENT) == 1;
         updateQSBatteryMode();
         updateSBBatteryStyle();
      }
@@ -421,6 +427,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         }
         mBatteryMeterView.updatePercentView();
         mBatteryMeterView.updateVisibility();
+	     mBatteryMeterView.setVisibility(isHideBattIcon ? View.GONE : View.VISIBLE);
      }
 
      private void updateSBBatteryStyle() {

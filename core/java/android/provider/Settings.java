@@ -5355,6 +5355,12 @@ public final class Settings {
         public static final String BRIGHTNESS_SLIDER_STYLE = "brightness_slider_style";
 		
 		/**
+         * Whether or not to hide the battery icon and % from QS header
+         * {@hide}
+         */
+        public static final String QS_HIDE_BATTERY = "qs_hide_battery";
+		
+		/**
 	    ** What to show in network traffic indicator in statusbar
 	    ** @hide
 	    **/
