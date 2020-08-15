@@ -5398,6 +5398,12 @@ public final class Settings {
         public static final String QS_SHOW_BRIGHTNESS_ABOVE_FOOTER = "qs_show_brightness_above_footer";
 		
 		/**
+         * Header height
+         * @hide
+         */
+        public static final String STATUS_BAR_CUSTOM_HEADER_HEIGHT = "status_bar_custom_header_height";
+		
+		/**
          * Whether to show the brighness slider auto brightness toggle
          * @hide
          */
