@@ -5350,6 +5350,11 @@ public final class Settings {
         public static final String QS_QUICKBAR_COLUMNS = "qs_quickbar_columns";
 		
 		/**
+         * @hide
+         */
+        public static final String BRIGHTNESS_SLIDER_STYLE = "brightness_slider_style";
+		
+		/**
 	    ** What to show in network traffic indicator in statusbar
 	    ** @hide
 	    **/
@@ -5573,6 +5578,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_VIEW_LOCATION);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_LAYOUT);
             PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_NEW_TINT);
+			 PRIVATE_SETTINGS.add(BRIGHTNESS_SLIDER_STYLE);
         }
 
         /**

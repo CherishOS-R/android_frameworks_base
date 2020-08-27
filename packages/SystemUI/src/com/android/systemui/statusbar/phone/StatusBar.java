@@ -3987,6 +3987,9 @@ public class StatusBar extends SystemUI implements DemoMode,
 			resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.BRIGHTNESS_SLIDER_QS_UNEXPANDED),
                     false, this, UserHandle.USER_ALL);
+			resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.BRIGHTNESS_SLIDER_STYLE),
+                    false, this, UserHandle.USER_ALL);
         }
          @Override
         public void onChange(boolean selfChange, Uri uri) {
@@ -4005,6 +4008,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             setHeadsUpStoplist();
             setHeadsUpBlacklist();
 			updateKeyguardStatusSettings();
+			updateBrightnessSliderStyle();
         }
     }
 
@@ -4021,6 +4025,11 @@ public class StatusBar extends SystemUI implements DemoMode,
 	private void updateKeyguardStatusSettings() {
         mNotificationPanelViewController.updateKeyguardStatusSettings();
     }
+	
+	public void updateBrightnessSliderStyle() {
+         int brighthnessSliderStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
+                 Settings.System.BRIGHTNESS_SLIDER_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
+     }
 
     public int getWakefulnessState() {
         return mWakefulnessLifecycle.getWakefulness();
