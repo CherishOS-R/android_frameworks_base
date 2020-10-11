@@ -5350,6 +5350,12 @@ public final class Settings {
         public static final String QS_QUICKBAR_COLUMNS = "qs_quickbar_columns";
 		
 		/**
+         * Whether to show the brighness slider auto brightness toggle
+         * @hide
+         */
+        public static final String QS_SHOW_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
+		
+		/**
          * @hide
          */
         public static final String BRIGHTNESS_SLIDER_STYLE = "brightness_slider_style";
