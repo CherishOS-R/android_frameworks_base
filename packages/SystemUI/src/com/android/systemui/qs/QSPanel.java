@@ -117,6 +117,7 @@ public class QSPanel extends LinearLayout implements Callback, BrightnessMirrorL
     private BrightnessController mBrightnessController;
 
     private boolean mBrightnessBottom;
+	 private boolean mQSBrightnessSlider;
     private boolean mBrightnessVisible;
     private View mBrightnessPlaceholder;
 
@@ -249,6 +250,9 @@ public class QSPanel extends LinearLayout implements Callback, BrightnessMirrorL
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_BRIGHTNESS_POSITION_BOTTOM),
                     false, this, UserHandle.USER_ALL);
+			resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.BRIGHTNESS_SLIDER_QS_UNEXPANDED),
+                    false, this, UserHandle.USER_ALL);
         }
 
         void unobserve() {
@@ -270,6 +274,8 @@ public class QSPanel extends LinearLayout implements Callback, BrightnessMirrorL
         }
 
         public void update() {
+			mQSBrightnessSlider = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.BRIGHTNESS_SLIDER_QS_UNEXPANDED, 0) != 0;
             updateViewVisibilityForTuningValue(
                     Settings.System.getIntForUser(mContext.getContentResolver(),
                     Settings.System.QS_SHOW_BRIGHTNESS, 1,
@@ -494,6 +500,10 @@ public class QSPanel extends LinearLayout implements Callback, BrightnessMirrorL
             addView(mBrightnessView, 0);
             mBrightnessBottom = false;
         }
+		
+		if (mQSBrightnessSlider) {
+                removeView(mBrightnessView);
+            }
     }
 
     public void openDetails(String subPanel) {
@@ -786,7 +796,7 @@ public class QSPanel extends LinearLayout implements Callback, BrightnessMirrorL
     }
 
     public void updateBrightnessMirror() {
-        if (mBrightnessMirrorController != null) {
+        if (mBrightnessMirrorController != null && !mQSBrightnessSlider) {
             ToggleSliderView brightnessSlider = findViewById(R.id.brightness_slider);
             ToggleSliderView mirrorSlider = mBrightnessMirrorController.getMirror()
                     .findViewById(R.id.brightness_slider);
